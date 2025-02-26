@@ -1,0 +1,5 @@
+/Users/vicente/Desktop/CG2025/Fase1/build/CMakeFiles/tinyxml2.dir
+/Users/vicente/Desktop/CG2025/Fase1/build/CMakeFiles/engine.dir
+/Users/vicente/Desktop/CG2025/Fase1/build/CMakeFiles/generator.dir
+/Users/vicente/Desktop/CG2025/Fase1/build/CMakeFiles/edit_cache.dir
+/Users/vicente/Desktop/CG2025/Fase1/build/CMakeFiles/rebuild_cache.dir
