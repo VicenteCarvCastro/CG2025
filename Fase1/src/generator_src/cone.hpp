@@ -6,6 +6,6 @@
 #include "../utils/primitive.hpp"
 #include "plane.hpp"
 
-Primitive generateCone(int radius, int height, int slices, int stacks);
+Primitive generateCone(float radius, float height, int slices, int stacks);
 
 #endif

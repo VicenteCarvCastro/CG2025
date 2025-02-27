@@ -1,31 +1,28 @@
 #include "cone.hpp"
 
 #include <iostream>
-#include <string>
-#include <vector>
+#include <cmath>
 
 #define _USE_MATH_DEFINES
-#include <math.h>
 
-using std::cerr, std::endl, std::stoi, std::stof, std::atan;
+using std::cerr, std::endl;
 
-Primitive generateCone(int bottomRadius, int height, int slices, int stacks) {
+Primitive generateCone(float bottomRadius, float height, int slices, int stacks) {
     Primitive cone = newEmptyPrimitive();
-
     if (!cone) return cone;
 
     float alpha = (2 * M_PI) / slices;  // Ângulo entre slices
-    float deltaRadius = (float)bottomRadius / stacks;  // Variação do raio por stack
-    float deltaHeight = (float)height / stacks;  // Variação da altura por stack
+    float deltaRadius = bottomRadius / stacks;  // Variação do raio por stack
+    float deltaHeight = height / stacks;  // Variação da altura por stack
 
-    // Base do cone
+    // Base do cone (Círculo)
     for (int i = 0; i < slices; i++) {
         float x1 = bottomRadius * sin(alpha * i);
         float z1 = bottomRadius * cos(alpha * i);
         float x2 = bottomRadius * sin(alpha * (i + 1));
         float z2 = bottomRadius * cos(alpha * (i + 1));
 
-        addValueList(getPontos(cone), newPoint(0.0f, 0.0f, 0.0f));
+        addValueList(getPontos(cone), newPoint(0.0f, 0.0f, 0.0f)); // Centro da base
         addValueList(getPontos(cone), newPoint(x2, 0.0f, z2));
         addValueList(getPontos(cone), newPoint(x1, 0.0f, z1));
     }
@@ -60,16 +57,17 @@ Primitive generateCone(int bottomRadius, int height, int slices, int stacks) {
         }
     }
 
-    // Ponta do cone
+    // Ponta do cone (único ponto no topo)
+    float tipX = 0.0f, tipY = height, tipZ = 0.0f;
     for (int i = 0; i < slices; i++) {
         float x1 = (bottomRadius - stacks * deltaRadius) * sin(alpha * i);
         float z1 = (bottomRadius - stacks * deltaRadius) * cos(alpha * i);
         float x2 = (bottomRadius - stacks * deltaRadius) * sin(alpha * (i + 1));
         float z2 = (bottomRadius - stacks * deltaRadius) * cos(alpha * (i + 1));
 
-        addValueList(getPontos(cone), newPoint(x1, height, z1));
-        addValueList(getPontos(cone), newPoint(x2, height, z2));
-        addValueList(getPontos(cone), newPoint(0.0f, height, 0.0f));
+        addValueList(getPontos(cone), newPoint(x1, height - deltaHeight, z1));
+        addValueList(getPontos(cone), newPoint(x2, height - deltaHeight, z2));
+        addValueList(getPontos(cone), newPoint(tipX, tipY, tipZ)); // Ponta do cone
     }
 
     return cone;
