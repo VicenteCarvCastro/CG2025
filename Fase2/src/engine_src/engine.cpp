@@ -143,7 +143,7 @@ void renderGroup(const Transform& t, int modelIndex) {
     
 
     // Desenha os modelos associados a essa transformação
-        glBegin(GL_TRIANGLES);
+        glBegin(GL_LINES);
         glColor3f(colors[colorIndex][0], colors[colorIndex][1], colors[colorIndex][2]);
          
         for (size_t i = 0; i < t.vertexes.size(); i += 3) {
