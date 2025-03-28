@@ -1,6 +1,6 @@
 CMakeFiles/generator.dir/utils/point.cpp.o: \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/point.cpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/point.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/point.cpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/point.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/stdlib.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__config \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__config_site \

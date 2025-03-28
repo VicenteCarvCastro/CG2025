@@ -166,7 +166,7 @@ void renderScene(void) {
     glLoadIdentity();  // Reseta a matriz de transformação
 
     gluLookAt(camx, camy, camz, lookAtx, lookAty, lookAtz, upx, upy, upz);
-    draw_axis();
+    //draw_axis();
 
     // Itera sobre todas as transformações e renderiza cada grupo corretamente
     for (size_t i = 0; i < transformations.size(); ++i) {

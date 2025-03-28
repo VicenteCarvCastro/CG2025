@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src
+CMAKE_SOURCE_DIR = /Users/flaviodrsousa/Desktop/CG2025/Fase2/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build
+CMAKE_BINARY_DIR = /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/engine.dir/depend.make
@@ -73,60 +73,60 @@ CMakeFiles/engine.dir/codegen:
 .PHONY : CMakeFiles/engine.dir/codegen
 
 CMakeFiles/engine.dir/engine_src/engine.cpp.o: CMakeFiles/engine.dir/flags.make
-CMakeFiles/engine.dir/engine_src/engine.cpp.o: /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/engine_src/engine.cpp
+CMakeFiles/engine.dir/engine_src/engine.cpp.o: /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/engine_src/engine.cpp
 CMakeFiles/engine.dir/engine_src/engine.cpp.o: CMakeFiles/engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/engine.dir/engine_src/engine.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/engine_src/engine.cpp.o -MF CMakeFiles/engine.dir/engine_src/engine.cpp.o.d -o CMakeFiles/engine.dir/engine_src/engine.cpp.o -c /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/engine_src/engine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/engine.dir/engine_src/engine.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/engine_src/engine.cpp.o -MF CMakeFiles/engine.dir/engine_src/engine.cpp.o.d -o CMakeFiles/engine.dir/engine_src/engine.cpp.o -c /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/engine_src/engine.cpp
 
 CMakeFiles/engine.dir/engine_src/engine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/engine.dir/engine_src/engine.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/engine_src/engine.cpp > CMakeFiles/engine.dir/engine_src/engine.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/engine_src/engine.cpp > CMakeFiles/engine.dir/engine_src/engine.cpp.i
 
 CMakeFiles/engine.dir/engine_src/engine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/engine.dir/engine_src/engine.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/engine_src/engine.cpp -o CMakeFiles/engine.dir/engine_src/engine.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/engine_src/engine.cpp -o CMakeFiles/engine.dir/engine_src/engine.cpp.s
 
 CMakeFiles/engine.dir/utils/point.cpp.o: CMakeFiles/engine.dir/flags.make
-CMakeFiles/engine.dir/utils/point.cpp.o: /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/point.cpp
+CMakeFiles/engine.dir/utils/point.cpp.o: /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/point.cpp
 CMakeFiles/engine.dir/utils/point.cpp.o: CMakeFiles/engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/engine.dir/utils/point.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/utils/point.cpp.o -MF CMakeFiles/engine.dir/utils/point.cpp.o.d -o CMakeFiles/engine.dir/utils/point.cpp.o -c /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/point.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/engine.dir/utils/point.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/utils/point.cpp.o -MF CMakeFiles/engine.dir/utils/point.cpp.o.d -o CMakeFiles/engine.dir/utils/point.cpp.o -c /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/point.cpp
 
 CMakeFiles/engine.dir/utils/point.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/engine.dir/utils/point.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/point.cpp > CMakeFiles/engine.dir/utils/point.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/point.cpp > CMakeFiles/engine.dir/utils/point.cpp.i
 
 CMakeFiles/engine.dir/utils/point.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/engine.dir/utils/point.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/point.cpp -o CMakeFiles/engine.dir/utils/point.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/point.cpp -o CMakeFiles/engine.dir/utils/point.cpp.s
 
 CMakeFiles/engine.dir/utils/list.cpp.o: CMakeFiles/engine.dir/flags.make
-CMakeFiles/engine.dir/utils/list.cpp.o: /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/list.cpp
+CMakeFiles/engine.dir/utils/list.cpp.o: /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/list.cpp
 CMakeFiles/engine.dir/utils/list.cpp.o: CMakeFiles/engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/engine.dir/utils/list.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/utils/list.cpp.o -MF CMakeFiles/engine.dir/utils/list.cpp.o.d -o CMakeFiles/engine.dir/utils/list.cpp.o -c /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/list.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/engine.dir/utils/list.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/utils/list.cpp.o -MF CMakeFiles/engine.dir/utils/list.cpp.o.d -o CMakeFiles/engine.dir/utils/list.cpp.o -c /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/list.cpp
 
 CMakeFiles/engine.dir/utils/list.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/engine.dir/utils/list.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/list.cpp > CMakeFiles/engine.dir/utils/list.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/list.cpp > CMakeFiles/engine.dir/utils/list.cpp.i
 
 CMakeFiles/engine.dir/utils/list.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/engine.dir/utils/list.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/list.cpp -o CMakeFiles/engine.dir/utils/list.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/list.cpp -o CMakeFiles/engine.dir/utils/list.cpp.s
 
 CMakeFiles/engine.dir/utils/primitive.cpp.o: CMakeFiles/engine.dir/flags.make
-CMakeFiles/engine.dir/utils/primitive.cpp.o: /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/primitive.cpp
+CMakeFiles/engine.dir/utils/primitive.cpp.o: /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/primitive.cpp
 CMakeFiles/engine.dir/utils/primitive.cpp.o: CMakeFiles/engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/engine.dir/utils/primitive.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/utils/primitive.cpp.o -MF CMakeFiles/engine.dir/utils/primitive.cpp.o.d -o CMakeFiles/engine.dir/utils/primitive.cpp.o -c /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/primitive.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/engine.dir/utils/primitive.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/utils/primitive.cpp.o -MF CMakeFiles/engine.dir/utils/primitive.cpp.o.d -o CMakeFiles/engine.dir/utils/primitive.cpp.o -c /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/primitive.cpp
 
 CMakeFiles/engine.dir/utils/primitive.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/engine.dir/utils/primitive.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/primitive.cpp > CMakeFiles/engine.dir/utils/primitive.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/primitive.cpp > CMakeFiles/engine.dir/utils/primitive.cpp.i
 
 CMakeFiles/engine.dir/utils/primitive.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/engine.dir/utils/primitive.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/utils/primitive.cpp -o CMakeFiles/engine.dir/utils/primitive.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/utils/primitive.cpp -o CMakeFiles/engine.dir/utils/primitive.cpp.s
 
 # Object files for target engine
 engine_OBJECTS = \
@@ -145,7 +145,7 @@ engine: CMakeFiles/engine.dir/utils/primitive.cpp.o
 engine: CMakeFiles/engine.dir/build.make
 engine: libtinyxml2.a
 engine: CMakeFiles/engine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable engine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable engine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/engine.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -157,6 +157,6 @@ CMakeFiles/engine.dir/clean:
 .PHONY : CMakeFiles/engine.dir/clean
 
 CMakeFiles/engine.dir/depend:
-	cd /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/build/CMakeFiles/engine.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/flaviodrsousa/Desktop/CG2025/Fase2/src /Users/flaviodrsousa/Desktop/CG2025/Fase2/src /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build/CMakeFiles/engine.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/engine.dir/depend
 

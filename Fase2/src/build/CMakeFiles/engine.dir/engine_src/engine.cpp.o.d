@@ -1,5 +1,5 @@
 CMakeFiles/engine.dir/engine_src/engine.cpp.o: \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/engine_src/engine.cpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/engine_src/engine.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__assert \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__assertion_handler \
@@ -984,4 +984,4 @@ CMakeFiles/engine.dir/engine_src/engine.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenGL.framework/Headers/gltypes.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glext.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/engine_src/../tinyXML/tinyxml2.hpp
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/engine_src/../tinyXML/tinyxml2.hpp

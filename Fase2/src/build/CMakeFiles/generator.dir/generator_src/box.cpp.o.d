@@ -1,5 +1,5 @@
 CMakeFiles/generator.dir/generator_src/box.cpp.o: \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/box.cpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/box.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/algorithm \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__assert \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__assertion_handler \
@@ -794,11 +794,11 @@ CMakeFiles/generator.dir/generator_src/box.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__bit/byteswap.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__bit/endian.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__bit/has_single_bit.h \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/box.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/../utils/list.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/../utils/point.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/../utils/primitive.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/plane.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/box.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/../utils/list.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/../utils/point.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/../utils/primitive.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/plane.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__bit_reference \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__format/enable_insertable.h \

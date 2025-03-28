@@ -1,6 +1,6 @@
 CMakeFiles/generator.dir/generator_src/generator.cpp.o: \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/generator.cpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/../utils/primitive.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/generator.cpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/../utils/primitive.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/stdlib.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__config \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__config_site \
@@ -256,13 +256,13 @@ CMakeFiles/generator.dir/generator_src/generator.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__math/rounding_functions.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__math/traits.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__math/trigonometric_functions.h \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/../utils/point.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/../utils/list.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/plane.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/box.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/cone.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/sphere.hpp \
-  /Users/flaviodrsousa/Desktop/CG/CG2025/Fase2/src/generator_src/ring.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/../utils/point.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/../utils/list.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/plane.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/box.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/cone.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/sphere.hpp \
+  /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/generator_src/ring.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/string.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/string.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/_string.h \
