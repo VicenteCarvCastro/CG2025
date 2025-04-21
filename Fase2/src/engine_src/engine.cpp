@@ -143,7 +143,7 @@ void renderGroup(const Transform& t, int modelIndex) {
     
 
     // Desenha os modelos associados a essa transformação
-        glBegin(GL_LINES);
+        glBegin(GL_TRIANGLES);
         glColor3f(colors[colorIndex][0], colors[colorIndex][1], colors[colorIndex][2]);
          
         for (size_t i = 0; i < t.vertexes.size(); i += 3) {
@@ -166,7 +166,7 @@ void renderScene(void) {
     glLoadIdentity();  // Reseta a matriz de transformação
 
     gluLookAt(camx, camy, camz, lookAtx, lookAty, lookAtz, upx, upy, upz);
-    //draw_axis();
+    draw_axis();
 
     // Itera sobre todas as transformações e renderiza cada grupo corretamente
     for (size_t i = 0; i < transformations.size(); ++i) {
