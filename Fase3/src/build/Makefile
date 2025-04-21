@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/flaviodrsousa/Desktop/CG2025/Fase2/src
+CMAKE_SOURCE_DIR = /Users/flaviodrsousa/Desktop/CG2025/Fase3/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build
+CMAKE_BINARY_DIR = /Users/flaviodrsousa/Desktop/CG2025/Fase3/src/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build/CMakeFiles /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/flaviodrsousa/Desktop/CG2025/Fase3/src/build/CMakeFiles /Users/flaviodrsousa/Desktop/CG2025/Fase3/src/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/flaviodrsousa/Desktop/CG2025/Fase2/src/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/flaviodrsousa/Desktop/CG2025/Fase3/src/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -178,6 +178,30 @@ engine_src/engine.s: engine_src/engine.cpp.s
 engine_src/engine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/engine_src/engine.cpp.s
 .PHONY : engine_src/engine.cpp.s
+
+generator_src/bezier.o: generator_src/bezier.cpp.o
+.PHONY : generator_src/bezier.o
+
+# target to build an object file
+generator_src/bezier.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/generator_src/bezier.cpp.o
+.PHONY : generator_src/bezier.cpp.o
+
+generator_src/bezier.i: generator_src/bezier.cpp.i
+.PHONY : generator_src/bezier.i
+
+# target to preprocess a source file
+generator_src/bezier.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/generator_src/bezier.cpp.i
+.PHONY : generator_src/bezier.cpp.i
+
+generator_src/bezier.s: generator_src/bezier.cpp.s
+.PHONY : generator_src/bezier.s
+
+# target to generate assembly for a file
+generator_src/bezier.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/generator_src/bezier.cpp.s
+.PHONY : generator_src/bezier.cpp.s
 
 generator_src/box.o: generator_src/box.cpp.o
 .PHONY : generator_src/box.o
@@ -374,6 +398,33 @@ utils/list.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/utils/list.cpp.s
 .PHONY : utils/list.cpp.s
 
+utils/matrix.o: utils/matrix.cpp.o
+.PHONY : utils/matrix.o
+
+# target to build an object file
+utils/matrix.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/utils/matrix.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/utils/matrix.cpp.o
+.PHONY : utils/matrix.cpp.o
+
+utils/matrix.i: utils/matrix.cpp.i
+.PHONY : utils/matrix.i
+
+# target to preprocess a source file
+utils/matrix.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/utils/matrix.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/utils/matrix.cpp.i
+.PHONY : utils/matrix.cpp.i
+
+utils/matrix.s: utils/matrix.cpp.s
+.PHONY : utils/matrix.s
+
+# target to generate assembly for a file
+utils/matrix.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/utils/matrix.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/utils/matrix.cpp.s
+.PHONY : utils/matrix.cpp.s
+
 utils/point.o: utils/point.cpp.o
 .PHONY : utils/point.o
 
@@ -442,6 +493,9 @@ help:
 	@echo "... engine_src/engine.o"
 	@echo "... engine_src/engine.i"
 	@echo "... engine_src/engine.s"
+	@echo "... generator_src/bezier.o"
+	@echo "... generator_src/bezier.i"
+	@echo "... generator_src/bezier.s"
 	@echo "... generator_src/box.o"
 	@echo "... generator_src/box.i"
 	@echo "... generator_src/box.s"
@@ -466,6 +520,9 @@ help:
 	@echo "... utils/list.o"
 	@echo "... utils/list.i"
 	@echo "... utils/list.s"
+	@echo "... utils/matrix.o"
+	@echo "... utils/matrix.i"
+	@echo "... utils/matrix.s"
 	@echo "... utils/point.o"
 	@echo "... utils/point.i"
 	@echo "... utils/point.s"

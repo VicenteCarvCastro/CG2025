@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/generator.dir/generator_src/bezier.cpp.o"
+  "CMakeFiles/generator.dir/generator_src/bezier.cpp.o.d"
   "CMakeFiles/generator.dir/generator_src/box.cpp.o"
   "CMakeFiles/generator.dir/generator_src/box.cpp.o.d"
   "CMakeFiles/generator.dir/generator_src/cone.cpp.o"
@@ -13,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/generator.dir/generator_src/sphere.cpp.o.d"
   "CMakeFiles/generator.dir/utils/list.cpp.o"
   "CMakeFiles/generator.dir/utils/list.cpp.o.d"
+  "CMakeFiles/generator.dir/utils/matrix.cpp.o"
+  "CMakeFiles/generator.dir/utils/matrix.cpp.o.d"
   "CMakeFiles/generator.dir/utils/point.cpp.o"
   "CMakeFiles/generator.dir/utils/point.cpp.o.d"
   "CMakeFiles/generator.dir/utils/primitive.cpp.o"
