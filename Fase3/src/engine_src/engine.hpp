@@ -13,6 +13,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "../utils/matrix.hpp"
 
 struct Point {
     float x;

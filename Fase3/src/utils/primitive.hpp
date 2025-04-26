@@ -38,6 +38,10 @@ List getPontos(Primitive pri);
  */
 void addPontos(Primitive f, Primitive toAdd);
 
+void addPonto(Primitive f, Point p);
+
+void addPontoArr(Primitive f, float* p);
+
 
 // Other Functions
 

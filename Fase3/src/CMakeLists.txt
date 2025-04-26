@@ -11,6 +11,7 @@ set(ENGINE_SOURCE_FILES
     utils/point.cpp
     utils/list.cpp
     utils/primitive.cpp
+    utils/matrix.cpp
 )
 
 # Adicione os arquivos de código fonte do generator
@@ -19,6 +20,8 @@ set(GENERATOR_SOURCE_FILES
     utils/point.cpp
     utils/list.cpp
     utils/primitive.cpp
+    utils/matrix.cpp
+    generator_src/bezier.cpp
     generator_src/plane.cpp
     generator_src/box.cpp
     generator_src/cone.cpp

@@ -6,6 +6,7 @@
 #include "cone.hpp"
 #include "sphere.hpp"
 #include "ring.hpp"
+#include "bezier.hpp"
 #include <string.h>
 #include <stdlib.h>
 #include <iostream>
@@ -53,6 +54,12 @@ int main(int argc, char *argv[]) {
 
             primitive = generateRing(ri,re,slices);  
         }
+        else if(strcmp(argv[1], "patch") == 0){
+            float tessellation = atoi(argv[3]);
+            const char* patchesFile = argv[2];
+            file_path = argv[4];
+            primitive = generateSurface(patchesFile,tessellation);
+    }
         else {
             // Invalid shape
             std::cerr << "Invalid shape." << std::endl;

@@ -13,7 +13,7 @@
 #endif
 #undef _NO_CRT_STDIO_INLINE
 #include "../tinyXML/tinyxml2.hpp"
-
+#include "../utils/matrix.hpp"
 
 
 using namespace std;
@@ -24,60 +24,84 @@ float upx = 0.0f, upy = 1.0f, upz = 0.0f;
 
 float posx = 0.0f, posz = 0.0f, angle = 0.0f, scalex = 1.0f, scaley = 1.0f, scalez = 1.0f;
 float fov = 0.0f, nearVal = 0.0f, farVal = 0.0f;
-
-struct Point {
-    float x, y, z;
-};
-
-vector<Point> vertexes;
+bool wireframe = true;
+float camDist = 500.0f;
 
 
+
+// --- Estruturas definidas pelo utilizador ---
+struct Point { float x, y, z; };
 struct Transformation {
-    int type;  // 0 = translate, 1 = rotate, 2 = scale
-    float values[4];  // Guarda os parâmetros necessários
+    enum Type { TRANSLATE_STATIC, TRANSLATE_CURVE, ROTATE_STATIC, ROTATE_TIME, SCALE } type;
+    float values[4] = {0,0,0,0};
+    bool align = false;
+    vector<Point> points;
 };
-
-
 struct Transform {
-    vector<Transformation> transformations;  // Armazena transformações ordenadas
-    float transX, transY, transZ;
-    float rotateAngle, rotateX, rotateY, rotateZ;
-    float scaleX, scaleY, scaleZ;
+    vector<Transformation> transformations;
     vector<Point> vertexes;
-
-    // Construtor padrão
-    Transform()
-        : transX(0.0f), transY(0.0f), transZ(0.0f),
-          rotateAngle(0.0f), rotateX(0.0f), rotateY(0.0f), rotateZ(0.0f),
-          scaleX(1.0f), scaleY(1.0f), scaleZ(1.0f),
-          vertexes() {}
+    GLuint vboID = 0;
+    GLsizei vertexCount = 0;
 };
+vector<Transform> transformations;
 
-std::vector<Transform> transformations;
+struct GroupNode {
+    Transform transform;
+    vector<GroupNode> children;
+};
+GroupNode rootGroup;
 
 
-
-
-
-void readFile(const string& fich, Transform& transform) {
-    ifstream file(fich);
-    if (!file.is_open()) {
-        cout << "Erro ao abrir o arquivo: " << fich << endl;
-        return;
+void draw_orbit(float radius) {
+    glBegin(GL_LINE_LOOP);
+    glColor3f(0.7f, 0.7f, 0.7f);  // Cor da órbita
+    for (int i = 0; i < 100; ++i) {
+        float angle = 2 * M_PI * i / 100;
+        glVertex3f(radius * cos(angle), 0.0f, radius * sin(angle));
     }
-
-    string linha;
-    while (getline(file, linha)) {
-        Point p;
-        if (sscanf(linha.c_str(), "%f,%f,%f", &p.x, &p.y, &p.z) == 3) {
-            transform.vertexes.push_back(p);  // Adiciona os vértices à estrutura de transformação
-        }
-    }
-    file.close();
-
-    cout << "Total de vértices carregados para o modelo " << fich << ": " << transform.vertexes.size() << endl;
+    glEnd();
 }
 
+
+
+void readFile(const string& path, Transform& tf) {
+    ifstream file(path);
+    if (!file) { cerr << "Erro a abrir " << path << endl; return; }
+    string line;
+    while (getline(file, line)) {
+        Point p;
+        if (sscanf(line.c_str(), "%f,%f,%f", &p.x, &p.y, &p.z) == 3)
+            tf.vertexes.push_back(p);
+    }
+    tf.vertexCount = tf.vertexes.size();
+}
+
+void initVBOsRecursive(GroupNode& node) {
+    if (!node.transform.vertexes.empty()) {
+        glGenBuffers(1, &node.transform.vboID);
+        glBindBuffer(GL_ARRAY_BUFFER, node.transform.vboID);
+        glBufferData(GL_ARRAY_BUFFER,
+                     node.transform.vertexCount * sizeof(Point),
+                     node.transform.vertexes.data(),
+                     GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
+    for (auto& child : node.children) {
+        initVBOsRecursive(child);
+    }
+}
+
+
+
+void draw_curve(const vector<Point>& points) {
+    glBegin(GL_LINE_STRIP);
+    glColor3f(1.0f, 0.0f, 0.0f); // Cor da curva
+    for (auto& p : points) {
+        glVertex3f(p.x, p.y, p.z);
+    }
+    glEnd();
+}
 
 
 void changeSize(int w, int h) {
@@ -110,224 +134,198 @@ float transX = 0.0f, transY = 0.0f, transZ = 0.0f;
 float rotateAngle = 0.0f, rotateX = 0.0f, rotateY = 0.0f, rotateZ = 0.0f;
 float scaleX = 1.0f, scaleY = 1.0f, scaleZ = 1.0f;
 
-void renderGroup(const Transform& t, int modelIndex) {
-    glPushMatrix();  // Salva a matriz de transformação atual
 
-    // Aplicar as transformações da matriz de transformação
-    for (const auto& trans : t.transformations) {
-        switch (trans.type) {
-        case 0:  // Translação
-            glTranslatef(trans.values[0], trans.values[1], trans.values[2]);
-            break;
-        case 1:  // Rotação
-            glRotatef(trans.values[0], trans.values[1], trans.values[2], trans.values[3]);
-            break;
-        case 2:  // Escala
-            glScalef(trans.values[0], trans.values[1], trans.values[2]);
-            break;
+void renderGroup(const GroupNode& node) {
+    glPushMatrix();
+
+    // Aplica transformações
+    for (const auto& tr : node.transform.transformations) {
+        switch (tr.type) {
+            case Transformation::TRANSLATE_STATIC:
+                glTranslatef(tr.values[0], tr.values[1], tr.values[2]);
+                break;
+
+            case Transformation::TRANSLATE_CURVE: {
+                float elapsed = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
+                float duration = tr.values[0];
+                float gt = fmod(elapsed, duration) / duration;
+                vector<vector<float>> ctrl;
+                for (auto& p : tr.points)
+                    ctrl.push_back({p.x, p.y, p.z});
+                float pos[3], deriv[3];
+                getGlobalCatmullRomPoint(gt, ctrl, pos, deriv);
+                glTranslatef(pos[0], pos[1], pos[2]);
+
+                if (tr.align) {
+                    float up[3] = {0,1,0}, right[3];
+                    cross(deriv, up, right); normalize(right);
+                    float up2[3]; cross(right, deriv, up2); normalize(up2);
+                    float m[16]; buildRotMatrix(deriv, up2, right, m);
+                    glMultMatrixf(m);
+                }
+                break;
+            }
+
+            case Transformation::ROTATE_STATIC:
+                glRotatef(tr.values[0], tr.values[1], tr.values[2], tr.values[3]);
+                break;
+
+            case Transformation::ROTATE_TIME: {
+                float elapsed = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
+                float duration = tr.values[0];
+                float ang = fmod(elapsed * 360.0f / duration, 360.0f);
+                glRotatef(ang, tr.values[1], tr.values[2], tr.values[3]);
+                break;
+            }
+
+            case Transformation::SCALE:
+                glScalef(tr.values[0], tr.values[1], tr.values[2]);
+                break;
         }
     }
 
-    // Paleta de cores para modelos diferentes
-    float colors[][3] = {
-        {1.0, 0.0, 0.0}, // Vermelho
-        {0.0, 1.0, 0.0}, // Verde
-        {0.0, 0.0, 1.0}, // Azul
-        {1.0, 1.0, 0.0}, // Amarelo
-        {1.0, 0.0, 1.0}, // Magenta
-        {0.0, 1.0, 1.0}  // Ciano
-    };
-
-    // Escolher uma cor com base no índice do modelo
-    int colorIndex = modelIndex % (sizeof(colors) / sizeof(colors[0]));
+    // Desenha geometria (se houver)
+    if (node.transform.vboID) {
+        glColor3f(0.8f, 0.5f, 0.1f); // Altere esta linha conforme o planeta
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glBindBuffer(GL_ARRAY_BUFFER, node.transform.vboID);
+        glVertexPointer(3, GL_FLOAT, 0, 0);
+        glDrawArrays(GL_TRIANGLES, 0, node.transform.vertexCount);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glDisableClientState(GL_VERTEX_ARRAY);
+    }
     
 
-    // Desenha os modelos associados a essa transformação
-        glBegin(GL_TRIANGLES);
-        glColor3f(colors[colorIndex][0], colors[colorIndex][1], colors[colorIndex][2]);
-         
-        for (size_t i = 0; i < t.vertexes.size(); i += 3) {
-            glVertex3f(t.vertexes[i].x, t.vertexes[i].y, t.vertexes[i].z);
-            glVertex3f(t.vertexes[i + 1].x, t.vertexes[i + 1].y, t.vertexes[i + 1].z);
-            glVertex3f(t.vertexes[i + 2].x, t.vertexes[i + 2].y, t.vertexes[i + 2].z);
-        }
-        glEnd();
+    // Desenha os filhos
+    for (const auto& child : node.children) {
+        renderGroup(child);
+    }
 
-
-    glPopMatrix();  // Restaura a matriz de transformação anterior
+    glPopMatrix();
 }
 
-
-
-
-void renderScene(void) {
+void renderScene() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glLoadIdentity();  // Reseta a matriz de transformação
+    glPolygonMode(GL_FRONT_AND_BACK, wireframe ? GL_LINE : GL_FILL);
+    glLoadIdentity();
 
-    gluLookAt(camx, camy, camz, lookAtx, lookAty, lookAtz, upx, upy, upz);
-    draw_axis();
+    gluLookAt(
+        camx, camy, camz,  // posição da câmera
+        lookAtx, lookAty, lookAtz,  // ponto para onde a câmera olha
+        upx, upy, upz  // vetor para cima
+      );
 
-    // Itera sobre todas as transformações e renderiza cada grupo corretamente
-    for (size_t i = 0; i < transformations.size(); ++i) {
-        renderGroup(transformations[i], i);
-    }
+    renderGroup(rootGroup);
 
     glutSwapBuffers();
 }
 
 
 
-
-
-void keyboardspecial(int key, int x, int y) {
-    switch (key) {
-    case GLUT_KEY_UP:
-        camy += 1;
-        break;
-    case GLUT_KEY_DOWN:
-        camy -= 1;
-        break;
-    case GLUT_KEY_LEFT:
-        camx -= 1;
-        break;
-    case GLUT_KEY_RIGHT:
-        camx += 1;
-        break;
+void keyboardSpecial(int key, int x, int y) {
+    switch(key) {
+      case GLUT_KEY_LEFT:  angle -= 5; break;
+      case GLUT_KEY_RIGHT: angle += 5; break;
+      case GLUT_KEY_UP:    camDist = max(10.0f, camDist - 10.0f); break;
+      case GLUT_KEY_DOWN:  camDist += 10.0f; break;
     }
     glutPostRedisplay();
-}
+  }
+  
 
-// write function to process keyboard events
-void keyboardFunc(unsigned char key, int x, int y) {
-    switch (key) {
-    case 'a':
-        posx -= 0.1;
-        break;
-    case 'd':
-        posx += 0.1;
-        break;
-    case 's':
-        posz += 0.1;
-        break;
-    case 'w':
-        posz -= 0.1;
-        break;
-    case 'q':
-        angle -= 15;
-        break;
-    case 'e':
-        angle += 15;
-        break;
-    case 'i':
-        scalez += 0.1;
-        break;
-    case 'k':
-        scalez -= 0.1;
-        break;
-    case 'j':
-        scalex -= 0.1;
-        break;
-    case 'l':
-        scalex += 0.1;
-        break;
-    case 'u':
-        scaley -= 0.1;
-        break;
-    case 'o':
-        scaley += 0.1;
-        break;
-    case '+':
-        scalex += 0.1;
-        scaley += 0.1;
-        scalez += 0.1;
-        break;
-    case '-':
-        scalex -= 0.1;
-        scaley -= 0.1;
-        scalez -= 0.1;
-        break;
+  void keyboardFunc(unsigned char key,int x,int y){
+    switch(key){
+      case 'w': posz -= 5; break;
+      case 's': posz += 5; break;
+      case 'a': posx -= 5; break;
+      case 'd': posx += 5; break;
+      case 'q': angle -= 5; break;
+      case 'e': angle += 5; break;
+      case 'i': camy   += 5; break;
+      case 'k': camy   -= 5; break;
+      case '+': camDist -= 10; break;
+      case '-': camDist += 10; break;
+      case 'm': wireframe = !wireframe; break;
     }
     glutPostRedisplay();
-}
+  }
+  
 
 
-void processGroup(tinyxml2::XMLElement* groupElem, const Transform& parentTransform) {
-    if (!groupElem) return;
 
-    // Criar um novo Transform que herda as transformações do pai
-    Transform currentTransform = parentTransform;
+GroupNode processGroup(tinyxml2::XMLElement* groupElem, const Transform& parentTransform) {
+    GroupNode node;
+    node.transform = parentTransform;
 
     tinyxml2::XMLElement* transformElem = groupElem->FirstChildElement("transform");
 
     if (transformElem) {
-        for (tinyxml2::XMLElement* elem = transformElem->FirstChildElement(); elem; elem = elem->NextSiblingElement()) {
+        for (auto *elem = transformElem->FirstChildElement(); elem; elem = elem->NextSiblingElement()) {
             std::string name = elem->Value();
             Transformation t;
-            t.values[0] = t.values[1] = t.values[2] = t.values[3] = 0.0f;  // Inicializa os valores
 
             if (name == "translate") {
-                t.type = 0;
-                elem->QueryFloatAttribute("x", &t.values[0]);
-                elem->QueryFloatAttribute("y", &t.values[1]);
-                elem->QueryFloatAttribute("z", &t.values[2]);
-
-                currentTransform.transX += t.values[0];
-                currentTransform.transY += t.values[1];
-                currentTransform.transZ += t.values[2];
-            } 
+                if (elem->QueryFloatAttribute("time", &t.values[0]) == tinyxml2::XML_SUCCESS) {
+                    // animação por curva
+                    t.type  = Transformation::TRANSLATE_CURVE;
+                    elem->QueryBoolAttribute("align", &t.align);
+                    for (auto *pt = elem->FirstChildElement("point"); pt; pt = pt->NextSiblingElement("point")) {
+                        Point p;
+                        pt->QueryFloatAttribute("x", &p.x);
+                        pt->QueryFloatAttribute("y", &p.y);
+                        pt->QueryFloatAttribute("z", &p.z);
+                        t.points.push_back(p);
+                    }
+                } else {
+                    t.type = Transformation::TRANSLATE_STATIC;
+                    elem->QueryFloatAttribute("x", &t.values[0]);
+                    elem->QueryFloatAttribute("y", &t.values[1]);
+                    elem->QueryFloatAttribute("z", &t.values[2]);
+                }
+            }
             else if (name == "rotate") {
-                t.type = 1;
-                elem->QueryFloatAttribute("angle", &t.values[0]);
-                elem->QueryFloatAttribute("x", &t.values[1]);
-                elem->QueryFloatAttribute("y", &t.values[2]);
-                elem->QueryFloatAttribute("z", &t.values[3]);
-
-                currentTransform.rotateAngle = t.values[0];
-                currentTransform.rotateX = t.values[1];
-                currentTransform.rotateY = t.values[2];
-                currentTransform.rotateZ = t.values[3];
-            } 
+                if (elem->QueryFloatAttribute("time", &t.values[0]) == tinyxml2::XML_SUCCESS) {
+                    t.type = Transformation::ROTATE_TIME;
+                    elem->QueryFloatAttribute("x", &t.values[1]);
+                    elem->QueryFloatAttribute("y", &t.values[2]);
+                    elem->QueryFloatAttribute("z", &t.values[3]);
+                } else {
+                    t.type = Transformation::ROTATE_STATIC;
+                    elem->QueryFloatAttribute("angle", &t.values[0]);
+                    elem->QueryFloatAttribute("x", &t.values[1]);
+                    elem->QueryFloatAttribute("y", &t.values[2]);
+                    elem->QueryFloatAttribute("z", &t.values[3]);
+                }
+            }
             else if (name == "scale") {
-                t.type = 2;
+                t.type = Transformation::SCALE;
                 elem->QueryFloatAttribute("x", &t.values[0]);
                 elem->QueryFloatAttribute("y", &t.values[1]);
                 elem->QueryFloatAttribute("z", &t.values[2]);
-
-                currentTransform.scaleX *= t.values[0];
-                currentTransform.scaleY *= t.values[1];
-                currentTransform.scaleZ *= t.values[2];
             }
 
-            // Adiciona ao vetor mantendo a ordem original do XML
-            currentTransform.transformations.push_back(t);
+            node.transform.transformations.push_back(t);
         }
     }
 
-    // Criar um Transform separado para armazenar apenas os modelos desse grupo
-    Transform modelTransform = currentTransform;
-
-    // Processar modelos (arquivos) dentro do grupo (apenas para este grupo)
+    // Modelos deste grupo
     tinyxml2::XMLElement* modelsElem = groupElem->FirstChildElement("models");
     if (modelsElem) {
         for (tinyxml2::XMLElement* modelElem = modelsElem->FirstChildElement("model"); modelElem; modelElem = modelElem->NextSiblingElement("model")) {
             const char* fileAttr = modelElem->Attribute("file");
             if (fileAttr) {
                 std::cout << "Carregando modelo: " << fileAttr << std::endl;
-                readFile(fileAttr, modelTransform);  // Só adiciona ao transform de modelos
+                readFile(fileAttr, node.transform);
             }
         }
     }
 
-    // Armazenar apenas transformações com modelos na lista
-    if (!modelTransform.vertexes.empty()) {
-        transformations.push_back(modelTransform);
+    // Subgrupos (filhos)
+    for (tinyxml2::XMLElement* subGroupElem = groupElem->FirstChildElement("group"); subGroupElem; subGroupElem = subGroupElem->NextSiblingElement("group")) {
+        node.children.push_back(processGroup(subGroupElem, Transform())); // começa de novo (não herda transformações acumuladas)
     }
 
-    // Processar subgrupos recursivamente (sem copiar modelos do pai)
-    for (tinyxml2::XMLElement* subGroupElem = groupElem->FirstChildElement("group"); subGroupElem; subGroupElem = subGroupElem->NextSiblingElement("group")) {
-        processGroup(subGroupElem, currentTransform);  // Passa apenas as transformações para os filhos
-    }
+    return node;
 }
 
 
@@ -387,7 +385,8 @@ void lerXML(const string& fich) {
     tinyxml2::XMLElement* groupElem = root->FirstChildElement("group");
     if (groupElem) {
         Transform initialTransform;
-        processGroup(groupElem, initialTransform);
+        rootGroup = processGroup(groupElem, initialTransform);
+
     } else {
         cout << "Aviso: Nenhum grupo encontrado no XML." << endl;
     }
@@ -397,35 +396,34 @@ void lerXML(const string& fich) {
 
 
 
-// Função corrigida
+
 int main(int argc, char** argv) {
-    if (argc > 1) {
-        lerXML(argv[1]);
-    } else {
-        std::cerr << "Erro: Arquivo XML não fornecido!" << std::endl;
+    if (argc < 2) {
+        cerr << "Erro: XML não fornecido\n";
+        return 1;
     }
+    lerXML(argv[1]);
 
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowPosition(100, 100);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
     glutInitWindowSize(800, 800);
-    glutCreateWindow("Projeto_CG");
+    glutCreateWindow("Projeto_CG - VBO");
 
-    glEnable(GL_CULL_FACE);  // Habilita o Culling
-    glCullFace(GL_BACK);     // Descartar faces traseiras
-    glFrontFace(GL_CCW);     // Definir sentido anti-horário como frente
+    initVBOsRecursive(rootGroup);
 
-
-    glutDisplayFunc(renderScene); // Desenha a cena
-    glutReshapeFunc(changeSize);  // Alteração do tamanho da janela
-    glutIdleFunc(renderScene);    // Atualiza a cena continuamente
-    glutSpecialFunc(keyboardspecial); // Teclas especiais (seta)
-    glutKeyboardFunc(keyboardFunc);   // Teclas normais (a, d, s, w, etc.)
+    
+    glutDisplayFunc(renderScene);
+    glutIdleFunc(renderScene);
+    glutReshapeFunc(changeSize);
+    glutKeyboardFunc(keyboardFunc);
+    glutSpecialFunc(keyboardSpecial);
 
     glEnable(GL_DEPTH_TEST);
-    // glEnable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 
     glutMainLoop();
-
     return 0;
 }
+

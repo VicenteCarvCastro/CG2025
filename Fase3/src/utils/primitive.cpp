@@ -43,6 +43,18 @@ void addPontos(Primitive f, Primitive toAdd){
     }
 }
 
+void addPonto(Primitive f, Point p){
+    if(f){
+        addValueList(f->pontos, p);
+    }
+}
+
+void addPontoArr(Primitive f, float* p){
+    addPonto(f,newPoint(p[0],p[1],p[2]));
+}
+
+
+
 //others
 void primitiveToFile(Primitive pri, const char* path) {
     if (!pri || !pri->pontos || !path) {
