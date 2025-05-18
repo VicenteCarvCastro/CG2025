@@ -214,7 +214,8 @@ void renderScene() {
         lookAtx, lookAty, lookAtz,  // ponto para onde a câmera olha
         upx, upy, upz  // vetor para cima
       );
-
+    
+    draw_axis();
     renderGroup(rootGroup);
 
     glutSwapBuffers();
